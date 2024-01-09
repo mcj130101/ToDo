@@ -1,8 +1,6 @@
 type Task {
     _id: ID!
-    title: String!
     content: String!
-    createdAt: String!
 }
 
 type Tasks {
@@ -12,12 +10,8 @@ type Tasks {
 type Query {
     getTasks: [Task!]
 }
-
-input taskInputData {
-    title: String!
-    content: String!
-}
-
 type Mutation {
-    createTask(taskInput : taskInputData!): Task!
+    createTask(content: String!): Task!
+    deleteTask(id: ID!): Task!
+    editTask(id: ID!, newContent: String!): String!
 }

@@ -5,23 +5,40 @@ const resolvers = {
     getTasks: async () => {
       const tasks = await Task.find();
       return tasks.map((t) => {
-          return {
-            ...t._doc,
-            _id: t._id.toString(),
-            createdAt: t.createdAt.toISOString(),
-          };
-        })
+        return {
+          _id: t._id.toString(),
+          content: t.content,
+        };
+      });
     },
   },
   Mutation: {
-    createTask: async (parent, args) => {
+    createTask: async (parent, { content }) => {
       const task = new Task({
-        title: args.taskInput.title,
-        content: args.taskInput.content,
+        content: content,
       });
       const createdTask = await task.save();
       console.log(createdTask);
       return { ...createdTask._doc };
+    },
+    editTask: async (parent, { id, newContent }) => {
+      const task = await Task.findById(id);
+      console.log(task);
+      if (!task) {
+        throw new Error("No task found");
+      }
+      task.content = newContent;
+      const result = await task.save();
+
+      return result.content;
+    },
+    deleteTask: async (parent, { id }) => {
+      const task = await Task.findById(id);
+      if (!task) {
+        throw new Error("no task found");
+      }
+      const result = await Task.findByIdAndDelete(id);
+      return { ...task._doc, _id: task._id.toString() };
     },
   },
 };

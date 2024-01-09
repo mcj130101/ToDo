@@ -1,0 +1,25 @@
+.todoList__wrapper {
+  margin: 4rem auto;
+  padding: 2rem 3rem 3rem;
+  max-width: 500px;
+  background: #ff6666;
+  color: #fff;
+  box-shadow: -20px -20px 0px 0px rgba(100, 100, 100, 0.1);
+}
+
+.todoList__wrapper .heading {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  margin-bottom: 3rem;
+}
+.heading h1 {
+    font-weight: normal;
+    font-size: 2.5rem;
+    letter-spacing: 0.05rem;
+}
+
+.heading p{
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+    margin-left: 3px;
+    margin-bottom: 0.7rem;
+}
